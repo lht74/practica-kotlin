@@ -1,19 +1,18 @@
 package recursividad
+import kotlin.math.pow
 
-import kotlin.random.Random
-fun jugar(n:Int, x: Int):String{
+
+fun jugar(n: Int, x: Int): String {
     return when {
-
-        (n > x )-> "Menos"
-        (n < x) -> "Más"
-        else -> "Correcto"
-
+        (n > x) -> "El número es Menor que $n"
+        (n < x) -> "El número es Mayor que $n"
+        else -> "¡Correcto! El número era $n"
     }
-
 }
+
 fun leerNumero(): Int {
     while (true) {
-        println("Por favor, ingresa tu número : ")
+        println("Por favor, ingresa tu número: ")
         try {
             val input = readlnOrNull()?.trim()
             if (input != null) {
@@ -30,32 +29,58 @@ fun leerNumero(): Int {
     }
 }
 
-fun selectLevel():Int{
-
-    var n = 1
-    println("Elige el nivel de dificultad entre 1 y 6 " +
-            "el nivel corresponde a la cantidad de dígitos que puede " +
-            "tener como máximo el número que intentarás adivinar")
-    n = leerNumero()
-    return n
+fun selectLevel(): Int {
+    while (true) {
+        println("\nElige el nivel de dificultad entre 1 y 6")
+        println("El nivel corresponde a la cantidad de dígitos que puede")
+        println("tener como máximo el número que intentarás adivinar")
+        val n = leerNumero()
+        if (n in 1..6) return n
+        println("Error: El nivel debe estar entre 1 y 6")
+    }
 }
 
+fun mostrarRango(nivel: Int) {
+    val maximo = 10.0.pow(nivel.toDouble()).toInt() - 1
+    println("\nDebes adivinar un número entre 1 y $maximo")
+}
+
+fun preguntarContinuar(): Boolean {
+    while (true) {
+        println("\n¿Deseas jugar otra vez? (S/N): ")
+        when (readlnOrNull()?.trim()?.uppercase()) {
+            "S" -> return true
+            "N" -> return false
+            else -> println("Por favor, responde S para Sí o N para No")
+        }
+    }
+}
+
+fun jugarPartida() {
+    val level = selectLevel()
+    val numeroX = Adivinar(level).numeroX()
+    var text = ""
+    var n = 0
+    var count = 0
+
+    mostrarRango(level)
+
+    while (text != "¡Correcto! El número era $n") {
+        n = leerNumero()
+        text = jugar(n, numeroX)
+        println(text)
+        count++
+    }
+
+    println("\n¡Felicitaciones! Has adivinado el número en $count intentos")
+}
 
 fun main() {
-val level = selectLevel()
-val numeroX = Adivinar(level).numeroX()
-var text = "asdf"
-var n =0
-var count =  0
+    println("¡Bienvenido al juego de Adivinar el Número!")
 
-    while (text != "Correcto"){
-   n = leerNumero()
-   text = jugar(n,numeroX)
-   println(text)
-   count++
+    do {
+        jugarPartida()
+    } while (preguntarContinuar())
 
-}
-println("Haz adivinado el número en $count intentos")
-
-
+    println("\n¡Gracias por jugar! ¡Hasta la próxima!")
 }
