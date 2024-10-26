@@ -17,4 +17,7 @@ fun main() {
 
     val ascendent = ordenPar(16,8){ a,b -> if ( a < b ) Pair(a,b) else Pair(b,a)}
     println(ascendent)
+
+    val descendent = ordenPar(5, 12){a,b -> if (a<b) Pair(b,a) else Pair(a,b)}
+    println("El par ordenado (5, 12) en orden descendente queda $descendent")
 }
