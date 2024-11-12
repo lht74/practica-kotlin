@@ -22,6 +22,15 @@ val withOutSpaces = { s: String ->
 val s = "Este es un texto de prue ba"
 println(withOutSpaces(s))
 
+val repite = {s:String, n:Int ->
+    var result: String = ""
+        for (i in 1..n)
+        result += "$s "
+    result
+    }
+
+    for (i in 1..10)
+        println(repite("$i",i))
 
 }
 
