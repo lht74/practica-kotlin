@@ -2,7 +2,7 @@
  * You can edit, run, and share this code.
  * play.kotlinlang.org
  */
-fun serpienteNumeros(rows: Int, columns: Int) {
+fun serpienteNums(rows: Int, columns: Int) {
     var n = 0
     var ni: Int
     val width = ((columns * rows).toString().length) + 1
@@ -23,7 +23,7 @@ fun serpienteNumeros(rows: Int, columns: Int) {
 
 fun main() {
     println("Hello, world!!!")
-    serpienteNumeros(4,6)
+    serpienteNums(4,6)
     
 }
 
